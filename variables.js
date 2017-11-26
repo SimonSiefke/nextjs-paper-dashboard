@@ -12,7 +12,7 @@ export const sidebarLinks = {
   'table-list': {
     name: 'table list',
     href: '/table-list',
-    icon: 'list'
+    icon: 'view-list-alt'
   },
   typography: {
     name: 'typography',
