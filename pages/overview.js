@@ -1,6 +1,28 @@
-import Page from '../layouts/main'
+import Link from '../components/Link'
 export default () => (
-  <Page name="overview">
-    <p>Welcome to Next.js!</p>
-  </Page>
+  <nav>
+    <style jsx>{`
+      .active:after {
+        content: ' (current page)';
+      }
+      .nav-link {
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+      }
+    `}</style>
+
+    <ul>
+      <li>
+        <Link activeClassName="active" href="/overview">
+          <a className="nav-link home-link">Home</a>
+        </Link>
+      </li>
+      <li>
+        <Link activeClassName="active" href="/about">
+          <a className="nav-link">About</a>
+        </Link>
+      </li>
+    </ul>
+  </nav>
 )
