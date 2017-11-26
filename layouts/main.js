@@ -1,10 +1,11 @@
 import SidebarNavigation from '../components/Navigation/Sidebar'
-import { routes } from '../variables'
+
+import { sidebarLinks } from '../variables'
 
 export default ({ name, children }) => [
-  <SidebarNavigation key="sidebar" />,
+  <SidebarNavigation links={sidebarLinks} key="sidebar" />,
   <main key="main">
-    <h1>{routes.overview.slug}</h1>
+    <h1>routes</h1>
     {children}
   </main>
 ]
