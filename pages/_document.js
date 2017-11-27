@@ -18,21 +18,30 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css"
           />
-          <style>{`
-          body{
-            font-family:Roboto, sans-serif;
-            font-weight: 500;
-          }
-            :root {
-          --padding-1: 1rem;
-          --padding-2: 2rem;
-          --padding-3: 3rem;
-        }
-          a{text-decoration:none;}
-          h1,h2,h3,h4,h5,h6{margin:0}
-          ul{list-style-type:none;
-          padding:0;margin:0}
-         `}</style>
+
+          <style jsx global>{`
+            body {
+              font-family: Roboto, sans-serif;
+              font-weight: 500;
+            }
+
+            a {
+              text-decoration: none;
+            }
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+              margin: 0;
+            }
+            ul {
+              list-style-type: none;
+              padding: 0;
+              margin: 0;
+            }
+          `}</style>
         </Head>
         <body>
           <Main />

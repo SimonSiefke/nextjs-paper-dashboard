@@ -3,15 +3,61 @@ import Link from '../Link'
 import PropTypes from 'prop-types'
 import TableList from '../../pages/table-list'
 import React, { Component } from 'react'
+import { applyMiddleware, bindActionCreators } from 'redux'
+import { connectAdvanced } from 'react-redux'
+// import Link from 'next/link'
+import { withRouter } from 'next/router'
+// import Link from 'next/link'
+const padding1 = '1rem'
+const padding2 = '1.3rem'
+const padding3 = '1.6rem'
+const padding4 = '1.9rem'
+const padding5 = '2.2rem'
+const padding6 = '2.5rem'
+const padding7 = '2.8rem'
+const padding8 = '3.1rem'
+const padding9 = '3.4rem'
+const padding10 = '3.7rem'
+const padding11 = '4rem'
+const padding12 = '4.3rem'
+const padding13 = '4.6rem'
+const padding14 = '4.9rem'
 
 class SideBar extends Component {
-  shouldComponentUpdate() {
-    return false
+  constructor() {
+    super()
+    this.state = {
+      activeIndex: 0
+    }
+  }
+  // shouldComponentUpdate() {
+  //   return false
+  // }
+  componentDidMount() {
+    const { router, children, ...props } = this.props
+    const { links } = this.props
+
+    Object.values(links).forEach((link, i) => {
+      if (link.href === router.pathname) {
+        this.setState({
+          activeIndex: i
+        })
+      }
+    })
   }
   render() {
     const { links } = this.props
 
-    console.log('sidebar')
+    // const activeIndex = Object.values(links)
+    // console.log(activeIndex)
+    // const active = Object.values(links).filter(
+    //   link => link.href === router.pathname
+    // )
+    // console.log('active', active)
+    // if (router.pathname === props.href) {
+    //   console.log(props.href)
+    //   console.log('yeah')
+    // }
     return (
       <nav>
         <header>
@@ -28,15 +74,19 @@ class SideBar extends Component {
           {Object.values(links).map(({ name, icon, href }, i) => (
             <li key={i}>
               <Link activeClassName="active" href={href}>
-                <a className="nav-link">
+                <a>
                   <i className={`ti ti-${icon}`} />
                   <span>{name}</span>
                 </a>
               </Link>
             </li>
           ))}
+          <li className="arrow" />
         </ul>
         <style jsx>{`
+          // * {
+          //   transition: all 3s;
+          // }
           .circle {
             display: inline-block;
             border-radius: 50%;
@@ -54,27 +104,28 @@ class SideBar extends Component {
             color: #3eaf7d;
             transition: all 0.5s;
           }
-          .active:after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-top: 1.2rem solid transparent;
-            border-bottom: 1.2rem solid transparent;
-            border-right: 1.2rem solid #f4f3ef;
+          .arrow {
+            position: absolute;
             right: 0;
-            transition: all 0.5s;
+            top: calc(${padding12}/2 - ${padding2});
+            padding: 0;
+            height: 0;
+            border-top: ${padding2} solid transparent;
+            border-bottom: ${padding2} solid transparent;
+            border-right: ${padding2} solid #f4f3ef;
+            transform: translateY(calc(${this.state.activeIndex}*${padding12}));
+            transition: all 1s;
           }
+
           nav {
             background-color: #212120;
             display: inline-block;
-            // padding: 1.5rem;
           }
           header {
             color: white;
             display: flex;
             align-items: center;
-            padding: var(--padding-1) var(--padding-2) var(--padding-1)
-              var(--padding-1);
+            padding: ${padding3} ${padding3} ${padding3} ${padding2};
           }
           h2 {
             margin-left: 1rem;
@@ -84,7 +135,7 @@ class SideBar extends Component {
           }
           hr {
             border-color: #646463;
-            margin: 0 var(--padding-1);
+            margin: 0 ${padding2};
           }
           a {
             color: #b3b3b3;
@@ -100,22 +151,28 @@ class SideBar extends Component {
             color: white;
           }
           ul {
+            position: relative;
           }
           li {
-            padding: 1.65rem 0;
-            padding-left: var(--padding-2);
+            // padding: $padding-3 0;
+            padding-left: ${padding4};
+            padding-right: ${padding4};
+            height: ${padding12};
+            display: flex;
+            align-items: center;
           }
-          li:last-of-type {
-            padding-bottom: var(--padding-2);
+          li:nth-last-of-type(2) {
+            padding-bottom: ${padding1};
           }
           i {
-            font-size: 200%;
+            line-height: ${padding4};
+            font-size: ${padding3};
             font-weight: 600;
           }
           span {
-            margin-left: var(--padding-1);
+            margin-left: ${padding1};
             flex: 1;
-            margin-right: var(--padding-2);
+            margin-right: ${padding2};
           }
         `}</style>
       </nav>
@@ -125,4 +182,4 @@ class SideBar extends Component {
 SideBar.propTypes = {
   links: PropTypes.object.isRequired
 }
-export default SideBar
+export default withRouter(SideBar)

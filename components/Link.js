@@ -21,20 +21,17 @@ import React, { Children, Component } from 'react'
 // }
 
 class ActiveLink extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return false
-  }
   render() {
     const { children, router, ...props } = this.props
     const child = Children.only(children)
 
     let className = child.props.className || ''
     if (router.pathname === props.href && props.activeClassName) {
+      console.log(props.href)
       className = `${className} ${props.activeClassName}`.trim()
     }
 
     delete props.activeClassName
-    console.log(props.href)
 
     return <Link {...props}>{React.cloneElement(child, { className })}</Link>
   }
